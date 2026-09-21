@@ -1,0 +1,200 @@
+{
+  "content": [
+    {
+      "type": "HeroSection",
+      "props": {
+        "id": "HeroSection-1",
+        "projectName": "Mahindra Mahalunge",
+        "developer": "Mahindra Lifespace Developers Ltd.",
+        "tagline": "Biophilic Masterplan in Pune's Emerging Growth Corridor",
+        "startingPrice": "₹70 Lakhs*",
+        "reraId": "Registration in Progress (MahaRERA: P521 Series Anticipated)",
+        "bgImageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1600&auto=format&fit=crop",
+        "whatsappNumber": "+91",
+        "theme": {
+          "bg": "#09090b",
+          "surface": "#121215",
+          "text": "#fafafa",
+          "muted": "#a1a1aa",
+          "accent": "#facc15",
+          "border": "#27272a"
+        }
+      }
+    },
+    {
+      "type": "OverviewBlock",
+      "props": {
+        "id": "OverviewBlock-1",
+        "headline": "Eco-Centric Urban Living",
+        "story": "Mahindra Mahalunge is an expansive 13.46-acre residential enclave adopting an eco-centric urban planning philosophy, with 75-80% open green spaces. The masterplan features staggered building blocks for optimal ventilation and solar access, built to IGBC Gold/Platinum sustainability standards with rainwater recharge, solar integration, and zero-discharge sewage treatment.",
+        "highlights": [
+          {
+            "label": "Site Area",
+            "value": "13.46–13.76 Acres"
+          },
+          {
+            "label": "Green Cover",
+            "value": "75–80% Open-to-Sky Greens"
+          },
+          {
+            "label": "Sustainability",
+            "value": "IGBC Gold/Platinum Targeted"
+          }
+        ],
+        "sideImageUrl": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop",
+        "theme": {
+          "bg": "#09090b",
+          "surface": "#121215",
+          "text": "#fafafa",
+          "muted": "#a1a1aa",
+          "accent": "#facc15",
+          "border": "#27272a"
+        }
+      }
+    },
+    {
+      "type": "PricingTypology",
+      "props": {
+        "id": "PricingTypology-1",
+        "heading": "Curated Residences & Investment Options",
+        "configurations": [
+          {
+            "type": "2 BHK Urban Luxe Residence",
+            "carpetArea": "630 – 720 Sq.Ft.",
+            "price": "₹70 – ₹85 Lakhs*",
+            "status": "Launch Offer",
+            "configImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
+          },
+          {
+            "type": "3 BHK Panoramic Family Suite",
+            "carpetArea": "900 – 1,050 Sq.Ft.",
+            "price": "₹1.10 – ₹1.40 Crore*",
+            "status": "Premium Views",
+            "configImage": "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1200&auto=format&fit=crop"
+          },
+          {
+            "type": "3.5 BHK Duplex / Grand Living",
+            "carpetArea": "1,200 – 1,350 Sq.Ft.",
+            "price": "₹1.45 – ₹1.65 Crore*",
+            "status": "Signature Collection",
+            "configImage": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=1200&auto=format&fit=crop"
+          }
+        ],
+        "whatsappNumber": "+91",
+        "theme": {
+          "bg": "#09090b",
+          "surface": "#121215",
+          "text": "#fafafa",
+          "muted": "#a1a1aa",
+          "accent": "#facc15",
+          "border": "#27272a"
+        }
+      }
+    },
+    {
+      "type": "CategorizedAmenities",
+      "props": {
+        "id": "CategorizedAmenities-1",
+        "heading": "Curated Lifestyle Amenities",
+        "pavilionImageUrl": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1600&auto=format&fit=crop",
+        "categories": [
+          {
+            "title": "Signature Sports & Clubhouse",
+            "items": [
+              "25,000 sq.ft. multi-level clubhouse",
+              "25-meter temperature-regulated lap pool",
+              "Floodlit multi-sport turf & tennis court",
+              "Yoga/Pilates studio & indoor games room"
+            ]
+          },
+          {
+            "title": "Riverfront Wellness",
+            "items": [
+              "800-meter reflexology pathway",
+              "Organic aroma gardens",
+              "Open-air amphitheater",
+              "Children's adventure parks"
+            ]
+          },
+          {
+            "title": "Community Infrastructure",
+            "items": [
+              "Co-working executive pods",
+              "Multi-purpose banquet hall",
+              "Private screening theatre",
+              "Residents' café lounge"
+            ]
+          }
+        ],
+        "theme": {
+          "bg": "#09090b",
+          "surface": "#121215",
+          "text": "#fafafa",
+          "muted": "#a1a1aa",
+          "accent": "#facc15",
+          "border": "#27272a"
+        }
+      }
+    },
+    {
+      "type": "ConnectivityMatrix",
+      "props": {
+        "id": "ConnectivityMatrix-1",
+        "address": "Nande–Mahalunge Corridor, Off Hinjawadi–Balewadi Link Road, Pune 411045",
+        "lat": 18.59,
+        "lng": 73.75,
+        "hubs": [
+          {
+            "name": "Hinjawadi IT Park",
+            "distance": "5.5 km (12–15 mins)"
+          },
+          {
+            "name": "Balewadi High Street",
+            "distance": "5.8 km (12–15 mins)"
+          },
+          {
+            "name": "Mumbai–Pune Expressway",
+            "distance": "7.2 km (15 mins)"
+          },
+          {
+            "name": "Pune Airport",
+            "distance": "21.0 km (50–55 mins)"
+          }
+        ],
+        "theme": {
+          "bg": "#09090b",
+          "surface": "#121215",
+          "text": "#fafafa",
+          "muted": "#a1a1aa",
+          "accent": "#facc15",
+          "border": "#27272a"
+        }
+      }
+    },
+    {
+      "type": "DeveloperTrust",
+      "props": {
+        "id": "DeveloperTrust-1",
+        "developer": "Mahindra Lifespace Developers Ltd.",
+        "legacyYears": "30+ Years",
+        "totalDeliveredSqft": "Tens of Millions Sq.Ft.",
+        "description": "Real estate arm of the multinational Mahindra Group, recognized for pioneering sustainable, IGBC-certified communities and transparent execution. Disclaimer: All images, architectural renders, interior layouts, and artistic impressions are for representational purposes only and may differ from the actual construction. Verify official RERA filings, sanctions, and approved plans directly with the developer prior to purchase.",
+        "disclaimer": "Disclaimer: All images, architectural renders, interior layouts, and artistic impressions are for representational purposes only and may differ from the actual construction. Verify official RERA filings, sanctions, and approved plans directly with the developer prior to purchase.",
+        "whatsappNumber": "+91",
+        "theme": {
+          "bg": "#09090b",
+          "surface": "#121215",
+          "text": "#fafafa",
+          "muted": "#a1a1aa",
+          "accent": "#facc15",
+          "border": "#27272a"
+        }
+      }
+    }
+  ],
+  "root": {
+    "props": {
+      "title": "Mahindra Mahalunge - Project Showcase"
+    }
+  }
+}
