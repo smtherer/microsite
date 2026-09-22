@@ -13,7 +13,7 @@ export const viewports = [
   { width: 1440, height: 900, label: "Desktop" },
 ];
 
-export const config: Config<any> & { viewports?: typeof viewports } = {
+export const config: any = {
   viewports,
   components: {
     HeroSection: {
