@@ -16,6 +16,35 @@ export const viewports = [
 export const config: any = {
   viewports,
   components: {
+    ProjectVault: {
+      render: ({ heading, description, driveUrl, buttonLabel, theme }) => {
+        const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
+        return (
+          <section style={{ backgroundColor: t.surface, color: t.text, borderColor: t.border }} className="p-6 sm:p-12 md:p-16 border-b text-center">
+            <div className="max-w-3xl mx-auto border rounded-2xl p-8 sm:p-12 shadow-2xl" style={{ backgroundColor: t.bg, borderColor: t.border }}>
+              <span className="text-[11px] font-mono uppercase tracking-widest px-3 py-1 border rounded inline-block mb-4" style={{ borderColor: t.border, color: t.accent }}>
+                Official Digital Dossier
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-serif font-light mb-4" style={{ color: t.text }}>
+                {heading || "Sanctioned Blueprints & Unit Vault"}
+              </h2>
+              <p className="text-xs sm:text-sm font-light max-w-xl mx-auto mb-8 leading-relaxed" style={{ color: t.muted }}>
+                {description || "Access official developer floor plans, master layout sanctions, pricing sheets, and unit inventory documents directly from the cloud repository."}
+              </p>
+              <a
+                href={driveUrl || "#"}
+                target="_blank"
+                rel="noreferrer"
+                style={{ backgroundColor: t.accent, color: t.bg }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-mono font-semibold uppercase tracking-widest text-xs hover:opacity-90 transition rounded-lg shadow-xl active:scale-95 text-center"
+              >
+                {buttonLabel || "Open Google Drive Vault ↗"}
+              </a>
+            </div>
+          </section>
+        );
+      },
+    },
     HeroSection: {
       render: ({ projectName, developer, tagline, startingPrice, reraId, bgImageUrl, whatsappNumber, theme }) => {
         const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
