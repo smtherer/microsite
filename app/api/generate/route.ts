@@ -7,7 +7,6 @@ interface ScrapedAssetPool {
   interiors: string[];
 }
 
-// Curated high-res luxury assets that NEVER fail or 404
 const VERIFIED_LUXURY_POOL = {
   hero: [
     "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80",
@@ -43,15 +42,19 @@ function filterCleanImages(images: any[] = []): string[] {
         !url.includes("logo") &&
         !url.includes("icon") &&
         !url.includes("avatar") &&
+        !url.includes("floor-plan") &&
         !title.includes("floor plan") &&
-        !title.includes("layout") &&
-        !title.includes("master plan")
+        !title.includes("master plan") &&
+        !title.includes("marriott") &&
+        !title.includes("westin") &&
+        !title.includes("hotel")
       );
     })
     .map((img) => img.imageUrl);
 }
 
-async function fetchDynamicProjectMedia(projectName: string, developer: string): Promise<ScrapedAssetPool> {
+// Targeted residential search with negative hotel & commercial keywords
+async function fetchDynamicProjectMedia(projectName: string): Promise<ScrapedAssetPool> {
   const apiKey = process.env.SERPER_API_KEY;
   if (!apiKey) {
     return {
@@ -62,23 +65,41 @@ async function fetchDynamicProjectMedia(projectName: string, developer: string):
     };
   }
 
+  // Block commercial entities, hotels, and retail malls from the image algorithm
+  const exclusions = "-hotel -marriott -westin -novotel -courtyard -inorbit -shoppers -mall -hospital -office -mindspace -commerzone";
+
   try {
     const headers = { "X-API-KEY": apiKey, "Content-Type": "application/json" };
     const [exteriorRes, interiorRes, amenityRes] = await Promise.all([
+      // 1. Exterior elevation strictly for the residential project
       fetch("https://google.serper.dev/images", {
         method: "POST",
         headers,
-        body: JSON.stringify({ q: `"${projectName}" Pune architectural elevation render`, gl: "in", num: 6 }),
+        body: JSON.stringify({
+          q: `"${projectName}" Pune residential towers elevation render ${exclusions}`,
+          gl: "in",
+          num: 6,
+        }),
       }),
+      // 2. Real apartment interiors (living rooms, bedrooms)
       fetch("https://google.serper.dev/images", {
         method: "POST",
         headers,
-        body: JSON.stringify({ q: `"${developer}" luxury residential sample flat interior`, gl: "in", num: 8 }),
+        body: JSON.stringify({
+          q: `"${projectName}" Pune sample flat interior living room ${exclusions}`,
+          gl: "in",
+          num: 8,
+        }),
       }),
+      // 3. Residential amenities
       fetch("https://google.serper.dev/images", {
         method: "POST",
         headers,
-        body: JSON.stringify({ q: `"${projectName}" Pune swimming pool amenities render`, gl: "in", num: 6 }),
+        body: JSON.stringify({
+          q: `"${projectName}" Pune residential clubhouse swimming pool podium ${exclusions}`,
+          gl: "in",
+          num: 6,
+        }),
       }),
     ]);
 
@@ -119,39 +140,40 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing OPENROUTER_API_KEY in .env.local" }, { status: 500 });
     }
 
-    // 1. Detect Google Drive / Cloud Vault Links automatically
+    // 1. Detect Google Drive / Vault Links
     const driveMatch = brochureInput.match(/https?:\/\/(?:drive\.google\.com|dropbox\.com)[^\s)]+/i);
     const driveUrl = driveMatch ? driveMatch[0] : "";
 
-    // 2. Robust Entity Name Extractor (Handles messy WhatsApp & Chat formats)
-    let projectName = "Luxury Project";
+    // 2. Clean Project and Developer Extraction
+    let projectName = "Raheja Vistas";
     let developer = "K Raheja Corp";
 
     const explicitName = brochureInput.match(/(?:Project(?:\s*Name)?|Residential Project)[\s:]*([^\n\r]+)/i);
-    const explicitDev = brochureInput.match(/Developer[\s:]*([^\n\r]+)/i);
-
     if (explicitName) {
       projectName = explicitName[1].replace(/[📍🏡✨🏗️]/g, "").trim();
     } else {
-      const firstLines = brochureInput.split("\n").map((l: string) => l.trim()).filter((l: string) => l && !l.includes("http"));
-      if (firstLines.length > 0) {
-        projectName = firstLines[0].replace(/[📍🏡✨🏗️]/g, "").trim();
+      const firstLine = brochureInput.split("\n").map((l: string) => l.trim()).find((l: string) => l && !l.includes("http") && !l.includes("2026"));
+      if (firstLine) {
+        projectName = firstLine.replace(/[📍🏡✨🏗️]/g, "").trim();
       }
     }
 
+    const explicitDev = brochureInput.match(/Developer[\s:]*([^\n\r]+)/i);
     if (explicitDev) {
-      developer = explicitDev[1].replace(/[📍🏡✨🏗️]/g, "").trim();
+      // Strips out emojis and limits developer to brand name only
+      developer = explicitDev[1].replace(/[📍🏡✨🏗️]/g, "").split(/[,(—\n]/)[0].trim();
     }
 
-    // 3. Fetch assets with fallbacks guaranteed
-    const mediaPool = await fetchDynamicProjectMedia(projectName, developer);
+    // 3. Fetch images with hotel exclusions
+    const mediaPool = await fetchDynamicProjectMedia(projectName);
 
     const systemPrompt = `You are a Principal Real Estate Digital Architect. Synthesize the provided dossier into a publication-grade Puck microsite JSON payload.
 
 CRITICAL CONTENT DIRECTIVES:
-1. Ground all typologies, carpet areas, and prices strictly in the input text. Include Simplex, Duplex, and standard configurations accurately.
-2. WHATSAPP ROUTING: Set "whatsappNumber": "${whatsappNumber || "919373810916"}" across all interactive blocks.
-3. THEME SPECIFICATION:
+1. DEVELOPER FIELD: Keep "developer" concise (e.g. "K Raheja Corp"). Place corporate history, retail malls, and hospitality brands strictly into "DeveloperTrust.description". Never put hotel names in the developer badge.
+2. Ground all typologies, carpet areas, and prices strictly in the input text. Include Simplex, Duplex, and standard configurations accurately.
+3. WHATSAPP ROUTING: Set "whatsappNumber": "${whatsappNumber || "919373810916"}" across all interactive blocks.
+4. THEME SPECIFICATION:
    Generate a 6-token theme object matching "${designVibe || "dark luxury"}":
    { "bg": "#120207", "surface": "#1e050f", "text": "#fbf5f7", "muted": "#b3929e", "accent": "#c5a059", "border": "#381020" }
 
@@ -276,12 +298,13 @@ REQUIRED PUCK SCHEMA:
 
     const payload = JSON.parse(rawContent);
 
-    // Guaranteed Image Injection
+    // Guaranteed Image Assignment
     if (Array.isArray(payload.content)) {
       payload.content.forEach((block: any) => {
         if (!block || !block.props) return;
 
         if (block.type === "HeroSection") {
+          block.props.developer = developer;
           block.props.bgImageUrl = mediaPool.hero || VERIFIED_LUXURY_POOL.hero[0];
         }
 
@@ -296,7 +319,6 @@ REQUIRED PUCK SCHEMA:
         if (block.type === "PricingTypology" && Array.isArray(block.props.configurations)) {
           block.props.notice = DISCLAIMER_NOTICE;
           block.props.configurations.forEach((conf: any, index: number) => {
-            // Guarantees every single typology card has a verified photo
             conf.configImage =
               mediaPool.interiors[index % mediaPool.interiors.length] ||
               VERIFIED_LUXURY_POOL.interiors[index % VERIFIED_LUXURY_POOL.interiors.length];
