@@ -1,12 +1,22 @@
-import type { Config } from "@puckeditor/core"
-import { ShieldCheck, CheckCircle2, Building2, MessageSquare, ArrowUpRight } from "lucide-react";
+import type { Config } from "@puckeditor/core";
+import { 
+  ShieldCheck, 
+  CheckCircle2, 
+  Building2, 
+  MessageSquare, 
+  ArrowUpRight, 
+  Clock, 
+  Layers, 
+  HelpCircle, 
+  FolderDown,
+  Sparkles
+} from "lucide-react";
 
 function getWhatsAppUrl(phone: string, text: string) {
   const cleanPhone = (phone || "919876543210").replace(/[^0-9]/g, "");
   return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
 }
 
-// Exported separately so you can pass it to <Puck viewports={viewports} />
 export const viewports = [
   { width: 390, height: 844, label: "Mobile (iPhone)" },
   { width: 768, height: 1024, label: "Tablet (iPad)" },
@@ -16,35 +26,7 @@ export const viewports = [
 export const config: any = {
   viewports,
   components: {
-    ProjectVault: {
-      render: ({ heading, description, driveUrl, buttonLabel, theme }) => {
-        const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
-        return (
-          <section style={{ backgroundColor: t.surface, color: t.text, borderColor: t.border }} className="p-6 sm:p-12 md:p-16 border-b text-center">
-            <div className="max-w-3xl mx-auto border rounded-2xl p-8 sm:p-12 shadow-2xl" style={{ backgroundColor: t.bg, borderColor: t.border }}>
-              <span className="text-[11px] font-mono uppercase tracking-widest px-3 py-1 border rounded inline-block mb-4" style={{ borderColor: t.border, color: t.accent }}>
-                Official Digital Dossier
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-serif font-light mb-4" style={{ color: t.text }}>
-                {heading || "Sanctioned Blueprints & Unit Vault"}
-              </h2>
-              <p className="text-xs sm:text-sm font-light max-w-xl mx-auto mb-8 leading-relaxed" style={{ color: t.muted }}>
-                {description || "Access official developer floor plans, master layout sanctions, pricing sheets, and unit inventory documents directly from the cloud repository."}
-              </p>
-              <a
-                href={driveUrl || "#"}
-                target="_blank"
-                rel="noreferrer"
-                style={{ backgroundColor: t.accent, color: t.bg }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-mono font-semibold uppercase tracking-widest text-xs hover:opacity-90 transition rounded-lg shadow-xl active:scale-95 text-center"
-              >
-                {buttonLabel || "Open Google Drive Vault ↗"}
-              </a>
-            </div>
-          </section>
-        );
-      },
-    },
+    // 1. HERO SECTION
     HeroSection: {
       render: ({ projectName, developer, tagline, startingPrice, reraId, bgImageUrl, whatsappNumber, theme }) => {
         const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
@@ -53,9 +35,9 @@ export const config: any = {
         return (
           <section style={{ backgroundColor: t.bg, color: t.text, borderColor: t.border }} className="relative min-h-[85vh] md:min-h-screen flex flex-col justify-between p-6 sm:p-10 md:p-16 border-b overflow-hidden">
             <div 
-              className="absolute inset-0 bg-cover bg-center transition-all duration-700" 
+              className="absolute inset-0 bg-cover bg-center transition-all duration-700 brightness-90" 
               style={{ 
-                backgroundImage: `linear-gradient(to top, ${t.bg} 15%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.8) 100%), url(${bgImageUrl || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1600"})` 
+                backgroundImage: `linear-gradient(to top, ${t.bg} 15%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.85) 100%), url(${bgImageUrl || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80"})` 
               }} 
             />
 
@@ -89,7 +71,7 @@ export const config: any = {
                 style={{ backgroundColor: t.accent, color: t.bg }}
                 className="w-full sm:w-auto px-8 py-4 font-mono font-semibold uppercase tracking-widest text-xs hover:opacity-90 transition flex items-center justify-center gap-2 rounded shadow-lg active:scale-95 text-center"
               >
-                <MessageSquare className="w-4 h-4" /> Chat on WhatsApp
+                <MessageSquare className="w-4 h-4" /> Connect on WhatsApp
               </a>
             </div>
           </section>
@@ -97,6 +79,7 @@ export const config: any = {
       },
     },
 
+    // 2. OVERVIEW BLOCK
     OverviewBlock: {
       render: ({ headline, story, highlights, sideImageUrl, theme }) => {
         const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
@@ -109,8 +92,8 @@ export const config: any = {
                 <p className="font-light text-sm sm:text-base md:text-lg leading-relaxed whitespace-pre-line" style={{ color: t.muted }}>{story}</p>
               </div>
               <div 
-                className="h-[300px] sm:h-[400px] w-full border bg-cover bg-center rounded-lg shadow-2xl" 
-                style={{ borderColor: t.border, backgroundImage: `url(${sideImageUrl || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200"})` }} 
+                className="h-[320px] sm:h-[420px] w-full border bg-cover bg-center rounded-lg shadow-2xl" 
+                style={{ borderColor: t.border, backgroundImage: `url(${sideImageUrl || "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"})` }} 
               />
             </div>
             {highlights && (
@@ -128,6 +111,7 @@ export const config: any = {
       },
     },
 
+    // 3. PRICING & TYPOLOGY CARDS
     PricingTypology: {
       render: ({ heading, configurations, whatsappNumber, notice, theme }) => {
         const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
@@ -138,12 +122,12 @@ export const config: any = {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {configurations?.map((c: any, i: number) => {
-                const waLink = getWhatsAppUrl(whatsappNumber, `Hi, I am inquiring about the ${c.type} (${c.carpetArea || "Standard Unit"}) priced at ${c.price}.`);
+                const waLink = getWhatsAppUrl(whatsappNumber, `Hi, I am inquiring about the ${c.type} (${c.carpetArea || "Unit"}) priced at ${c.price}.`);
                 return (
                   <div key={i} style={{ backgroundColor: t.surface, borderColor: t.border }} className="border rounded-lg flex flex-col justify-between overflow-hidden group hover:border-neutral-500 transition">
                     <div 
-                      className="h-52 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" 
-                      style={{ backgroundImage: `url(${c.configImage || "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800"})` }} 
+                      className="h-56 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" 
+                      style={{ backgroundImage: `url(${c.configImage || "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"})` }} 
                     />
                     <div className="p-6 flex flex-col flex-grow justify-between">
                       <div>
@@ -179,18 +163,84 @@ export const config: any = {
       },
     },
 
+    // 4. TIMELINE / ROADMAP SECTION (NEW)
+    TimelineSection: {
+      render: ({ heading, subtitle, phases, theme }) => {
+        const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
+        return (
+          <section style={{ backgroundColor: t.surface, color: t.text, borderColor: t.border }} className="p-6 sm:p-10 md:p-16 border-b">
+            <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: t.accent }}>03 // Development Lifecycle</span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-light mb-2">{heading || "Construction Milestones & Handover"}</h2>
+            <p className="text-xs sm:text-sm font-light mb-10" style={{ color: t.muted }}>{subtitle || "Targeted execution schedule backed by developer commitment and RERA milestones."}</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+              {phases?.map((p: any, i: number) => (
+                <div key={i} style={{ backgroundColor: t.bg, borderColor: t.border }} className="border rounded-xl p-6 relative flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-mono px-2 py-0.5 border rounded" style={{ borderColor: t.border, color: t.accent }}>Phase 0{i + 1}</span>
+                      <Clock className="w-4 h-4" style={{ color: t.accent }} />
+                    </div>
+                    <h3 className="text-lg font-serif font-light mb-2">{p.title}</h3>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: t.muted }}>{p.description}</p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t" style={{ borderColor: t.border }}>
+                    <span className="text-xs font-mono font-medium block" style={{ color: t.accent }}>{p.date}</span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider" style={{ color: t.muted }}>{p.status || "Scheduled"}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      },
+    },
+
+    // 5. ARCHITECTURAL SPECIFICATIONS (NEW)
+    SpecificationList: {
+      render: ({ heading, categories, theme }) => {
+        const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
+        return (
+          <section style={{ backgroundColor: t.bg, color: t.text, borderColor: t.border }} className="p-6 sm:p-10 md:p-16 border-b">
+            <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: t.accent }}>04 // Material Pedigree</span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-light mb-10">{heading || "Finishes & Engineering Specifications"}</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {categories?.map((cat: any, i: number) => (
+                <div key={i} style={{ backgroundColor: t.surface, borderColor: t.border }} className="border rounded-xl p-6">
+                  <div className="flex items-center gap-2 mb-4 pb-2 border-b" style={{ borderColor: t.border }}>
+                    <Layers className="w-4 h-4" style={{ color: t.accent }} />
+                    <h3 className="text-xs font-mono uppercase tracking-widest font-semibold" style={{ color: t.accent }}>{cat.name}</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    {cat.specs?.map((spec: string, idx: number) => (
+                      <li key={idx} className="text-xs sm:text-sm font-light flex items-start gap-2.5">
+                        <Sparkles className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: t.accent }} />
+                        <span style={{ color: t.muted }}>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      },
+    },
+
+    // 6. CATEGORIZED AMENITIES
     CategorizedAmenities: {
       render: ({ heading, pavilionImageUrl, categories, theme }) => {
         const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
         return (
           <section style={{ backgroundColor: t.surface, color: t.text, borderColor: t.border }} className="p-6 sm:p-10 md:p-16 border-b">
-            <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: t.accent }}>03 // Curated Lifestyle</span>
+            <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: t.accent }}>05 // Curated Lifestyle</span>
             <h2 className="text-2xl sm:text-3xl font-serif font-light mb-8">{heading || "World-Class Infrastructure"}</h2>
             <div 
-              className="w-full h-[260px] sm:h-[380px] mb-8 border bg-cover bg-center rounded-lg shadow-lg" 
-              style={{ backgroundImage: `url(${pavilionImageUrl || "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1200"})` }} 
+              className="w-full h-[280px] sm:h-[400px] mb-8 border bg-cover bg-center rounded-lg shadow-lg" 
+              style={{ backgroundImage: `url(${pavilionImageUrl || "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80"})` }} 
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {categories?.map((cat: any, i: number) => (
                 <div key={i} style={{ backgroundColor: t.bg, borderColor: t.border }} className="border rounded-lg p-6">
                   <h3 className="text-xs font-mono uppercase tracking-widest mb-4 pb-2 border-b" style={{ borderColor: t.border, color: t.accent }}>{cat.title}</h3>
@@ -210,19 +260,20 @@ export const config: any = {
       },
     },
 
+    // 7. CONNECTIVITY MATRIX
     ConnectivityMatrix: {
       render: ({ address, lat, lng, hubs, theme }) => {
         const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
-        const safeLat = typeof lat === "number" ? lat : 18.52;
-        const safeLng = typeof lng === "number" ? lng : 73.85;
+        const safeLat = typeof lat === "number" ? lat : 18.5721;
+        const safeLng = typeof lng === "number" ? lng : 73.7482;
 
         return (
           <section style={{ backgroundColor: t.bg, color: t.text, borderColor: t.border }} className="p-6 sm:p-10 md:p-16 border-b">
-            <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: t.accent }}>04 // Strategic Location</span>
+            <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: t.accent }}>06 // Strategic Location</span>
             <h2 className="text-2xl sm:text-3xl font-serif font-light mb-2">{address}</h2>
             <p className="text-xs font-mono mb-8" style={{ color: t.muted }}>COORDINATES: {safeLat}° N, {safeLng}° E</p>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 h-[320px] sm:h-[420px] border rounded-lg overflow-hidden" style={{ borderColor: t.border }}>
+              <div className="lg:col-span-2 h-[340px] sm:h-[440px] border rounded-lg overflow-hidden" style={{ borderColor: t.border }}>
                 <iframe 
                   width="100%" 
                   height="100%" 
@@ -233,10 +284,10 @@ export const config: any = {
               </div>
               <div style={{ backgroundColor: t.surface, borderColor: t.border }} className="border rounded-lg p-6 flex flex-col justify-between">
                 <div>
-                  <h4 className="text-xs uppercase font-mono tracking-widest mb-4 pb-2 border-b" style={{ borderColor: t.border, color: t.accent }}>Connectivity Hubs</h4>
+                  <h4 className="text-xs uppercase font-mono tracking-widest mb-4 pb-2 border-b" style={{ borderColor: t.border, color: t.accent }}>Key Transit Hubs</h4>
                   <div className="space-y-3">
                     {hubs?.map((hub: any, i: number) => (
-                      <div key={i} className="flex justify-between items-center text-xs py-1 border-b border-zinc-800/50">
+                      <div key={i} className="flex justify-between items-center text-xs py-1.5 border-b" style={{ borderColor: `${t.border}80` }}>
                         <span style={{ color: t.text }}>{hub.name}</span>
                         <span className="font-mono font-medium" style={{ color: t.accent }}>{hub.distance}</span>
                       </div>
@@ -250,6 +301,64 @@ export const config: any = {
       },
     },
 
+    // 8. PROJECT VAULT / GOOGLE DRIVE SECTION (NEW)
+    ProjectVault: {
+      render: ({ heading, description, driveUrl, buttonLabel, theme }) => {
+        const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
+        return (
+          <section style={{ backgroundColor: t.surface, color: t.text, borderColor: t.border }} className="p-6 sm:p-12 md:p-16 border-b text-center">
+            <div className="max-w-3xl mx-auto border rounded-2xl p-8 sm:p-12 shadow-2xl" style={{ backgroundColor: t.bg, borderColor: t.border }}>
+              <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest px-3 py-1 border rounded mb-4" style={{ borderColor: t.border, color: t.accent }}>
+                <FolderDown className="w-3.5 h-3.5" /> Official Digital Vault
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-serif font-light mb-4" style={{ color: t.text }}>
+                {heading || "Sanctioned Blueprints & Unit Vault"}
+              </h2>
+              <p className="text-xs sm:text-sm font-light max-w-xl mx-auto mb-8 leading-relaxed" style={{ color: t.muted }}>
+                {description || "Access official developer floor plans, master layout sanctions, pricing sheets, and unit inventory documents directly from the verified cloud repository."}
+              </p>
+              <a
+                href={driveUrl || "#"}
+                target="_blank"
+                rel="noreferrer"
+                style={{ backgroundColor: t.accent, color: t.bg }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-mono font-semibold uppercase tracking-widest text-xs hover:opacity-90 transition rounded-lg shadow-xl active:scale-95 text-center"
+              >
+                {buttonLabel || "Open Google Drive Vault ↗"}
+              </a>
+            </div>
+          </section>
+        );
+      },
+    },
+
+    // 9. FAQ ACCORDION SECTION (NEW)
+    FAQSection: {
+      render: ({ heading, subtitle, items, theme }) => {
+        const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
+        return (
+          <section style={{ backgroundColor: t.bg, color: t.text, borderColor: t.border }} className="p-6 sm:p-10 md:p-16 border-b">
+            <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: t.accent }}>07 // Due Diligence</span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-light mb-2">{heading || "Frequently Asked Questions"}</h2>
+            <p className="text-xs sm:text-sm font-light mb-8" style={{ color: t.muted }}>{subtitle || "Essential investor clarity on payment structures, possession, and legal compliance."}</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
+              {items?.map((faq: any, i: number) => (
+                <div key={i} style={{ backgroundColor: t.surface, borderColor: t.border }} className="border rounded-xl p-6">
+                  <div className="flex items-start gap-3 mb-3">
+                    <HelpCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: t.accent }} />
+                    <h4 className="text-sm sm:text-base font-serif font-light">{faq.question}</h4>
+                  </div>
+                  <p className="text-xs sm:text-sm font-light leading-relaxed pl-7" style={{ color: t.muted }}>{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      },
+    },
+
+    // 10. DEVELOPER TRUST
     DeveloperTrust: {
       render: ({ developer, legacyYears, totalDeliveredSqft, description, disclaimer, whatsappNumber, theme }) => {
         const t = theme || { bg: "#09090b", surface: "#121215", text: "#fafafa", muted: "#a1a1aa", accent: "#facc15", border: "#27272a" };
@@ -280,7 +389,7 @@ export const config: any = {
                 style={{ backgroundColor: t.accent, color: t.bg }}
                 className="inline-flex items-center gap-2 px-8 py-4 font-mono font-semibold uppercase tracking-widest text-xs hover:opacity-90 transition rounded shadow-lg"
               >
-                <MessageSquare className="w-4 h-4" /> Connect with Sales Advisor on WhatsApp
+                <MessageSquare className="w-4 h-4" /> Connect with Advisor on WhatsApp
               </a>
 
               {disclaimer && (
