@@ -28,6 +28,7 @@ export async function POST(req: Request) {
     const blob = await put(`microsites/${slug}.json`, JSON.stringify(puckData), {
       access: "public",
       addRandomSuffix: false, // Keeps the URL predictable
+      allowOverwrite: true,   // Allows overwriting when re-publishing the same project
     });
 
     return NextResponse.json({
